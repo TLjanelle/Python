@@ -1,0 +1,46 @@
+# Requires: Python version 3
+
+# Description : Write the information (timestamps) to a file. 
+# You must have a function which takes an input log message line and 
+# returns the timestamp found at the beginning of it. 
+# Do you not print to the screen, write to a file called timestamps.txt.
+
+# Note: requires input file "project04_log_sshd_messages" 
+# be in the same directory as this Py script.
+
+# Note: Writes to output file in same directory 
+# called "timestamps".
+
+# Warning: each run of this program overwrites 
+# contents of "project04_log_sshd_messages"
+
+# Function to read line and parse on the whitespace character
+# then returns the timestamp only
+def get_timestamp(msg):
+    timestamp = msg.split(" ")[0]
+    return timestamp
+
+# store in a variable the name of input file.
+file_input  = "project04_log_sshd_messages.txt"
+
+# store in a variable the name of output file.
+file_output = "timestamps.txt"
+
+# open file handle for reading ("r") to input file 
+fhin  = open( file_input  , "r" ) 
+
+# open file handle for writing ("w") to output file 
+fhout = open( file_output , "w" )
+
+# read one line of file from file handle
+# and enter loop. Stops when EOF reached.
+for line in fhin:
+    # store in a variable the timestamp
+    line = get_timestamp(line)
+    # print to file handle
+    fhout.write(line + "\n")
+
+# close reading file handle.
+fhin.close()
+# close writing file handle.
+fhout.close()

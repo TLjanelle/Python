@@ -1,0 +1,20 @@
+# Requires: Python version 3
+#
+# Description: Write a script that prompts the user to enter a string, stores that input in a variable, and the outputs one
+# of two responses to the user’s input.
+
+# The script must first instantiate and initialize exactly 4 variables. 
+
+prompt = "Enter a string: "
+response = input(prompt)
+hitchhiker = 'Answer to the Ultimate Question of Life, the Universe, and Everything'
+deadhead1 = 'Your typical city involved in a typical daydream.'
+deadhead2 = 'Hang it up and see what tomorrow brings.'
+
+
+# Use an if statement to determine if the user input the number 42
+
+if (response == "42"):
+    print(hitchhiker)
+else:
+    print(deadhead1 + "\n" + deadhead2)

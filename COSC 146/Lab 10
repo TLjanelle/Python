@@ -1,0 +1,21 @@
+# Requires: Python version 3
+#
+# Description: Create an empty dictionary, add four key-value pairs to it, and you 
+# use a loop to print out the key-value pairs.
+
+# Create an empty dictionary called astronauts_evas.
+astronauts_evas = dict()
+
+# Add four key-value pairs to the dictionary (on four separate lines of code).
+astronauts_evas['Solovyev, Anatoly'] = '16'
+astronauts_evas['López-Alegría, Michael'] = '10'
+astronauts_evas['Feustel, Andrew J.'] = '09'
+astronauts_evas['Whitson, Peggy'] = '10'
+
+# Print the following string with a print function: 'EVAs:\tAstronaut:'
+print("EVAs:\tAstronaut:")
+
+# Create a for-loop which iterates over the keys of the dictionary astronauts_evas
+# and prints the value of the given key followed by the key itself. 
+for astronaut in astronauts_evas:
+    print(astronauts_evas[astronaut] + "\t" + astronaut + "\t")   

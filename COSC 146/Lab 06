@@ -1,0 +1,49 @@
+# Requires: Python version 3
+#
+# Description: Write a script that prompts the user to enter two numbers at the keyboard and then sums the numbers
+# and displays the sum to the screen. Two functions must be defined. Then use a loop to ask if the user wants to
+# sum two numbers again using yes or no.
+
+# The first function takes no arguments, the  body must prompt the user for a number and store the number.
+def get_sum():
+    num = int(input("Enter a number: "))
+    return num
+
+# The second function must take 2 arguments to sum, and the body of the function
+# must return the sum of the two numbers that were passed as arguments to the function.
+def sum_2_sums(n1, n2):
+    added = n1 + n2
+    return added
+
+# Use a while loop to ask the user if they want to continue and force the 
+# first run by initializing a string in the variable continue_
+# Note: continue without the underscore is a default statement in python.
+continue_ = 'n'
+
+while (continue_ == 'n' or continue_ == 'N' or continue_ == 'no' or continue_ == 'NO'):
+    
+    # Define 2 variables and set each to call the get_sum function and store the numbers.
+    num1 = get_sum()
+    num2 = get_sum()
+
+    # Define a variable and set it to call the sum_2_sums function using the variables defined to get user input
+    sum = sum_2_sums(num1, num2)
+
+    # Print the sum
+    print(f'Sum = {sum} ')
+
+    # Ask the user if they would like to continue
+    prompt = 'Quit (Y/N)? '
+    continue_ = input(prompt)   
+
+    # Use an if statement to determine the users input. YES or an invalid input 
+    # should exit the program, NO should rerun the program.
+    if (continue_ == 'y' or continue_ == 'Y' or continue_ == 'yes' or continue_ == 'YES'):
+        exit()
+    elif (continue_ == 'n' or continue_ == 'N' or continue_ == 'no' or continue_ == 'NO'):
+        pass 
+    else:
+        print('Invalid input.')
+        exit()
+    
+

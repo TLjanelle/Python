@@ -1,0 +1,10 @@
+
+var1 = 20.0
+var2 = 22.0
+var3 = var1 + var2
+str1 = "The sum: "
+
+print(str1)
+print(var3)
+
+print(str1 + str(var3))

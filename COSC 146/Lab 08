@@ -1,0 +1,32 @@
+# Requires: Python version 3
+#
+# Description: write a function which returns the timestamp. open an input
+# log file that contains timestamp messages,  read each line of the
+# input file into your script, apply your function to each of those line, and then print just the timestamp using the
+# return value of your user-defined fuction.
+
+# Note: requires input file "lab08_log_sshd_messages" 
+# be in the same directory as this Py script.
+
+# Define a function called get_timestamp() which takes one input argument/parameter and returns the timestamp. 
+# Each log message has a timestamp which has NO whitepace characters in the timestamp itself (so, the
+# first whitespace character in the string which you are processing will be just after the timestamp). Your
+# get_timestamp() function must use the split() function (and thus return index 0 of the split)
+# which is described in the book PY4E 8.9 (Lists and strings). In the function definition, you must name
+# the input variable msg.
+def get_timestamp(msg):
+    return msg.split(" ")[0]
+
+# store name of input file in a variable.
+file_input = "lab08_log_sshd_messages"
+
+# open file handle to file.
+fhin = open( file_input , "r" ) 
+
+# read one line of file from file handle and enter loop. 
+# Stops when EOF reached and prints to the screen the timestamp.
+for line in fhin:
+    print(get_timestamp(line))
+
+# close file handle.
+fhin.close()

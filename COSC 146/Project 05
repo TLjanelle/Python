@@ -1,0 +1,198 @@
+# Requires: Python version 3
+
+# Description: 
+
+# This program makes lists of log files lines
+# and it requires one to create certain regular
+# expression patterns which, for the referenced 
+# input file, yield the following output.
+#
+#	Total Log messages:       100000
+#	SSHD - Log messages:       89655
+#	SSHD - Failed logins:      15243
+#	SSHD - Fails - root:       10088
+#	SSHD - Fails - nonroot:     5155
+#
+# The program is an exercise in log file parsing
+# to find out different frequencies for failed
+# SSH login attempts (for root and nonroot) amongst
+# the various log messages in the input file.
+
+# Note: this is an exercise in Python for
+# parsing log files with regular expresions
+# - particularly it is checking for failed
+# login attempts on the SSH server. The method
+# used here has been simplified and you should
+# know that each system is going to dictate 
+# how you determine how to parse failed login
+# attempts. For example, some systems have 
+# verbose logging set, which means you might
+# have multiple log lines pertaining to one
+# login attempt, and so you would need to make
+# a decision as to which line you will consider
+# to indicate a failed attempt. Another example
+# is that you might get different log information
+# for attempted logins for users for which there
+# is no name in the system, or you might have 
+# a log line for when the login disconnects before
+# the failure is returned to the login attempt, 
+# and part of this is logged, but a failed password
+# attempt (or final decision to deny) might not 
+# be logged before the login user 'hangs up.' For
+# many reasons similar to the aforementioned, this
+# is an exercise which arbitrarily uses "Failed password"
+# as the criterion for a failed login attempt.
+
+
+
+# We need to read the contents of this file, 
+# which has one log message per line, and 
+# first find and keep all the SSH log messages.
+# Then, from that subset of log messages, we
+# want to keep a separate list of the ones
+# that identify a failed a log-in for the SSH
+# server/daemon.
+# After we create the second list of failed
+# SSH logins, we create TWO more lists - 
+# ONE that stores the log messages which are
+# failed login messages on SSH for the user
+# 'root' (the main admin account), and ONE
+# list which stores the failed login messages
+# on SSH for all other users (non-root users).
+#
+# So, to recap...
+#
+# 1. we read all the lines 
+# in the file, one-at-a-time, and decide if 
+# we put it that line into the list called ==> list_01_sshd
+
+
+# 2. we iterate over the ones that we kept in
+# list_01_sshd (the SSHD log messages), and 
+# decide which of them that we put into the 
+# second list of failed logins - a list called
+# ==> list_02_sshd_failed
+#
+# 3. we iterate over the one that we kept in 
+# list_02_sshd_failed (the failed SSH logins), and
+# we look at each one and decide if they should
+# be classified as a login failure either for root
+# or for other users. Each of the failed login messages 
+# shall go into one of two last lists.
+# ==> list_03_sshd_failed_root
+# ==> list_03_sshd_failed_nonroot
+
+# 4. When we are all done, we are going to print 
+# to STDOUT the stats on each of the following:
+# 1. how many ssh failed logins.
+# 2. how many ssh failed logins for the root user.
+# 3. how many ssh failed logins for non-root users.
+#
+# We do this by printing out the size/length of three 
+# of the four lists which were created.
+# Note: the code has some additional print lines to help
+# you determine when it is working properly and you may
+# comment them out when you are done.
+
+
+import re     # provides function re.search() 
+
+# =========================================================
+# STEP 01 of 04:
+#
+# Open file, read each line, and decide if it's a log file
+# line which was placed there by the SSH server/daemon - SSHD.
+# If so, save it to the list  list_01_sshd
+
+# file to be opened.
+infile = "project05_var_log_secure_trimmed.txt"
+# file handle to read once file connection is opened.
+fhin = open( infile , "r" )
+
+# Read each line from the input file & decide if it is one that we need to set aside in a 
+# separate list - one that holds log messages from the SSH server/daemon (i.e., SSHD).
+# If the line contains a regex match for a SSHD log message, then we append it to 
+# the new list for just SSHD log messages - called list_01_sshd.
+list_01_sshd = [ ]
+
+# we need this counter to see how many lines
+# in total were read from the file.
+counter_total_lines = 0
+for line in fhin:
+	counter_total_lines += 1
+	# remove any newline / carriage returns from end of each line. Sometimes makes
+	# regex easier, and not a big loss of process time if you're not dealing with
+	# big data and need it done on-the-fly for an end customer.
+	line = line.strip('\r')
+	line = line.strip('\n')
+
+	# if the line contains for anything that might identify it as a log message that
+	# has been posted by the SSH daemon (i.e., SSHD), then keep this message by
+	# by appending it to a new list called list_02_sshd_failed
+	if re.search( r'sshd\b' , line ):
+            list_01_sshd.append( line )
+        
+
+# Done reading input file, so close file handle.
+fhin.close()
+
+# =========================================================
+# STEP 02 of 04:
+#
+# Iterate over  list_01_sshd  and, for those lines which
+# contain some reference to the phrase 'Failed password',
+# then add the log line to the list  list_02_sshd_failed
+
+list_02_sshd_failed         = [ ]
+for line in list_01_sshd:
+	if re.search( r'Failed\b\spassword\b' , line ):
+		list_02_sshd_failed.append( line )
+
+# =========================================================
+# STEP 03 of 04:
+# 
+# Iterate over  list_02_sshd_failed  and, for those lines
+# which the user is root, then add the log line to the list
+# list_03_sshd_failed_root  ELSE, add the log line to 
+# list_03_sshd_failed_nonroot  (becuase if not root, then
+# is any other user).
+
+# stores log line with SSH failed logins for root.
+list_03_sshd_failed_root    = [ ]  
+# stores log line with SSH failed logins for non-root users.
+list_03_sshd_failed_nonroot = [ ]
+
+for line in list_02_sshd_failed:
+	if re.search( r'\sroot\b\s' , line ):
+		list_03_sshd_failed_root.append( line )
+	else:
+		list_03_sshd_failed_nonroot.append( line )
+
+
+# =========================================================
+# STEP 04 of 04:
+# 
+# Print out results...
+
+# # For debugging if you want to see the names in the 
+# # log lines for failed SSH logins for non-root users.
+# for line in list_03_sshd_failed_nonroot:
+# 	print( line )
+
+# print('=========================================================')
+
+# # For debugging if you want to see the names in the
+# # log lines for failed SSH logins for root users.
+# for line in list_03_sshd_failed_root:
+#     print(line)
+
+
+# Comment out the first 2 print() functions when all is working correctly. 
+# print( "{:<25s}{:>7d}" .format( "Total Log messages:" , counter_total_lines ) )
+# print( "{:<25s}{:>7d}" .format( "SSHD - Log messages:" , len(list_01_sshd)  ) )
+print( "{:<25s}{:>7d}" .format( "SSHD - Failed logins:" , len(list_02_sshd_failed) ) )
+print( "{:<25s}{:>7d}" .format( "SSHD - Fails - root:" , len(list_03_sshd_failed_root) ) )
+print( "{:<25s}{:>7d}" .format( "SSHD - Fails - nonroot:" , len(list_03_sshd_failed_nonroot) ) )
+
+
+

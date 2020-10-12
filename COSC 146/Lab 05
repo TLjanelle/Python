@@ -1,0 +1,26 @@
+# Requires: Python version 3
+#
+# Description: Write a script that prompts the user to enter two numbers at the keyboard and then sums the numbers
+# and displays the sum to the screen. Two functions must be defined. 
+
+
+# The first function takes no arguments, the  body must prompt the user for a number and store the number.
+def get_sum():
+    num = int(input("Enter a number: "))
+    return num
+
+# The second function must take 2 arguments to sum, and the body of the function 
+# must return the sum of the two numbers that were passed as arguments to the function. 
+def sum_2_sums(n1, n2):
+    added = n1 + n2
+    return added
+
+# Define 2 variables and set each to call the get_sum function and store the numbers.
+num1 = get_sum()
+num2 = get_sum()
+
+# Define a variable and set it to call the sum_2_sums function using the variables defined to get user input
+sum = sum_2_sums(num1, num2)
+
+# Print the sum
+print(f'Sum = {sum}')

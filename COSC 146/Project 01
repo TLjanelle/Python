@@ -1,0 +1,29 @@
+# Requires: Python2 or Python3
+#
+# Description: This program takes three numbers from user input, 
+# then sums each possibility and prints each sum.
+
+
+# Get Input Numbers from a user
+num1 = input("Enter number 1: ")
+num2 = input("Enter number 2: ")
+num3 = input("Enter number 3: ")
+
+# Change variables from string to float to handle decimals (for a better program)
+num1 = float(num1)
+num2 = float(num2)
+num3 = float(num3)
+
+# Calculate and Print the sums
+
+## Print the sum of num1 and num2
+sum = num1 + num2
+print(f'Sum 1: {num1} + {num2} = {sum}')
+
+## Print the sum of num1 and  num3
+sum = num1 + num3
+print(f'Sum 2: {num1} + {num3} = {sum}')
+
+## Print the sum of num2 and num3
+sum = num2 + num3
+print(f'Sum 3: {num2} + {num3} = {sum}')

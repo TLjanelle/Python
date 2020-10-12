@@ -1,0 +1,36 @@
+# Requires: Python version 3
+#
+# Description: This program prompts the user to enter a number representing a percentage grade, and the
+# program will print out out the user's equivalent letter grade.
+
+# Prompt the user to enter their numerical grade, and store the grade as a float.
+grade = float(input("Enter grade (e.g., for 90.2%, enter 90.2 and not .902): "))
+ 
+# Use a conditonal to determine the students grade and print the result.
+
+## If a student enters a grade greater than 100 , their grade is an A with extra credit
+if (grade > 100):
+    print ("Your grade is A with extra credit.")
+
+## If a students enters a grade greater than or equal to 90 and less than or equal to 100, their grade is an A
+elif (grade >= 90.0):
+    print("Your grade is A.")
+
+## If a students enters a grade greater than or equal to 80 and less than 90, their grade is a B
+elif (grade >= 80.0):
+    print("Your grade is B.")
+
+    ## If a students enters a grade greater than or equal to 70 and less than 80, their grade is a C
+elif (grade >= 70.0):
+    print("Your grade is C.")
+
+## If a students enters a grade greater than or equal to 60 and less than 70, their grade is a D
+elif (grade >= 60.0):
+    print ("Your grade is D.")
+## If a students enters a grade greater than or equal to 0 and less than 60, their grade is an E
+elif (grade >= 0.0):
+    print("Your grade is E.")
+## If the value entered is a negative number, then the output is Invalid.
+else:
+    print("Invalid Number.")
+

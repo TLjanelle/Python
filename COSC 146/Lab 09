@@ -1,0 +1,125 @@
+# Requires: Python version 3
+#
+# Description: Create python lists utilizing multiple functions including insert, copy, sort, append, and while loops.
+
+# Define a function called lines() which takes no arguments and contains just one print statement:
+# print(“==============================”)
+def lines():
+    print("==============================")
+
+# Create 2 empty python lists - one called K and one called L.
+K = []
+L = []
+
+# Insert into list K at index 2 the integer 42.
+K.insert(2,42)
+
+# Insert into list K at index 0 the integer 84.
+K.insert(0, 84)
+
+# Insert into list K at index 1 the integer 21.
+K.insert(1,21)
+
+# Insert into list L at index 2 the string ‘Hello’.
+L.insert(2,'Hello')
+
+# Insert into list L at index 0 the string ‘world’.
+L.insert(0,'world')
+
+# Insert into list L at index 1 the string ‘!’.
+L.insert(1,'!')
+
+# Create a new list, called M, which contains a copy of the contents of K. You must use Python
+# functionality to copy the contents of K into M - either all together in one statement or via multiple
+# statements which copy the index values in M to K.
+M = K.copy()
+
+# Create a new list, called N, which contains a copy of the contents of L. You must use Python
+# functionality to copy the contents of L into N - either all together in one statement or via multiple
+# statements which copy the index values in N to L.
+N = L.copy()
+
+# Reverse M via the reverse function.
+M.reverse()
+
+# Reverse N via the reverse function.
+N.reverse()
+
+# call the lines() function.
+lines()
+
+# In 4 separate print() statements, print the contents of K, L, M, N.
+print(K)
+print(L)
+print(M)
+print(N)
+
+# call the lines() function.
+lines()
+
+# Sort K via the sort function.
+K.sort()
+
+# Sort L via the sort function.
+L.sort()
+
+# Sort M via the sort function.
+M.sort()
+
+# Sort N via the sort function.
+N.sort()
+
+# In 4 separate print() statements, print the contents of K, L, M, N.
+print(K)
+print(L)
+print(M)
+print(N)
+
+# call the lines() function.
+lines()
+
+# Create an empty list X.
+X = []
+
+# Using the append function, append K to the list X.
+X.append(K)
+
+# Using the append function, append L to the list X.
+X.append(L)
+
+# Using the append function, append M to the list X.
+X.append(M)
+
+# Using the append function, append N to the list X.
+X.append(N)
+
+# Create a counter variable i and initialize it to 0.
+# Create a while loop with a boolean condition that i is less than length of X.
+# As the first line of the while loop, print X at index i.
+# As the second line of the while loop, increment the index i by 1.
+i = 0
+while i < len(X):
+    print(X[i])
+    i += 1
+
+# call the lines() function.
+lines()
+
+# Clear the contents of the list X via the clear function.
+X.clear()
+
+# Set X equal to the contents of the four lists - K, L, M, N. Use the join operator (+) to concatenate 
+# in the statement. 
+X = K + L + M + N
+
+# Reinitialize the variable i to 0.
+# Create a while loop with a boolean condition that i is less than length of X.
+# As the first line of the while loop, print X at index i.
+# As the second line of the while loop, increment the index i by 1.
+i = 0
+while i < len(X):
+    print(X[i])
+    i += 1
+
+# call the lines() function.
+lines()
